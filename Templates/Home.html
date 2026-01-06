@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Churn Prediction</title>
+</head>
+<body>
+
+<h2>Customer Churn Prediction</h2>
+
+<form action="/predict" method="post">
+
+    <!-- Senior Citizen -->
+    <label>Senior Citizen</label>
+    <select name="SeniorCitizen" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+    <br><br>
+
+    <!-- Tenure -->
+    <label>Tenure (months)</label>
+    <input type="number" name="tenure" required>
+    <br><br>
+
+    <!-- Online Security -->
+    <label>Online Security</label>
+    <select name="OnlineSecurity" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="No internet service">No internet service</option>
+    </select>
+    <br><br>
+
+    <!-- Online Backup -->
+    <label>Online Backup</label>
+    <select name="OnlineBackup" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="No internet service">No internet service</option>
+    </select>
+    <br><br>
+
+    <!-- Device Protection -->
+    <label>Device Protection</label>
+    <select name="DeviceProtection" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="No internet service">No internet service</option>
+    </select>
+    <br><br>
+
+    <!-- Tech Support -->
+    <label>Tech Support</label>
+    <select name="TechSupport" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+        <option value="No internet service">No internet service</option>
+    </select>
+    <br><br>
+
+    <!-- Paperless Billing -->
+    <label>Paperless Billing</label>
+    <select name="PaperlessBilling" required>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+    <br><br>
+
+    <!-- Monthly Charges -->
+    <label>Monthly Charges</label>
+    <input type="number" step="0.01" name="MonthlyCharges" required>
+    <br><br>
+
+    <!-- Total Charges -->
+    <label>Total Charges</label>
+    <input type="number" step="0.01" name="TotalCharges" required>
+    <br><br>
+
+    <!-- Avg Monthly Spend -->
+    <label>Average Monthly Spend</label>
+    <input type="number" step="0.01" name="avg_monthly_spend" required>
+    <br><br>
+
+    <!-- Internet Service -->
+    <label>Internet Service</label>
+    <select name="InternetService" required>
+        <option value="DSL">DSL</option>
+        <option value="Fiber optic">Fiber optic</option>
+        <option value="No">No</option>
+    </select>
+    <br><br>
+
+    <!-- Contract -->
+    <label>Contract</label>
+    <select name="Contract" required>
+        <option value="Month-to-month">Month-to-month</option>
+        <option value="One year">One year</option>
+        <option value="Two year">Two year</option>
+    </select>
+    <br><br>
+
+    <!-- Payment Method -->
+    <label>Payment Method</label>
+    <select name="PaymentMethod" required>
+        <option value="Electronic check">Electronic check</option>
+        <option value="Mailed check">Mailed check</option>
+        <option value="Bank transfer (automatic)">Bank transfer (automatic)</option>
+        <option value="Credit card (automatic)">Credit card (automatic)</option>
+    </select>
+    <br><br>
+
+    <button type="submit">Predict</button>
+</form>
+
+{% if result_text %}
+    <h3>{{ result_text }}</h3>
+    <p>
+        There is a {{ churn_probability }}% probability that the customer may churn,
+        which indicates a {{ risk_text }}.
+    </p>
+{% endif %}
+
+</body>
+</html>
