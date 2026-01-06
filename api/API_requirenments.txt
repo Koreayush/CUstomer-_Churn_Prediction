@@ -1,8 +1,12 @@
 TensorFlow ==v2.16.1
+sklearn
 fastapi
 uvicorn
+joblib
 python-multipart
 pillow
 tensorflow-serving-api==2.5.0
+pandas 
 matplotlib
 numpy
+gunicorn 
