@@ -30,10 +30,6 @@ def predict_churn(data: ChurnInput):
     }
 
 
-@app.get("/")
-async def root():
-    return {"status": "Hellow , I am alive"}
-
 
 
 if __name__ == "__main__":
