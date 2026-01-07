@@ -1,10 +1,10 @@
 from fastapi import FastAPI , Request ,Form
 from fastapi.templating import Jinja2Templates
 from fastapi.responses  import HTMLResponse
-import uvicorn
 import joblib
-from input_schema import ChurnInput
-from logic import prepare_input
+from .input_schema import ChurnInput
+from .logic import prepare_input
+import os 
 
 
 app = FastAPI(
@@ -13,13 +13,29 @@ app = FastAPI(
     version="1.0"
 )
 
-templates = Jinja2Templates(directory="Templates")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+templates = Jinja2Templates(directory=os.path.join(BASE_DIR,"Templates")) 
 
 ## Loding Model Files 
 
-model_package = joblib.load("churn_model.joblib")
-model = model_package["model"]
-feature_columns = model_package["features"]
+model = None
+feature_columns = None
+
+@app.on_event("startup")
+def load_model():
+    global model, feature_columns
+
+    MODEL_PATH = os.path.join(BASE_DIR, "Models", "churn_model_v2.joblib")
+
+    if not os.path.exists(MODEL_PATH):
+        raise RuntimeError(f"Model not found at {MODEL_PATH}")
+
+    model_package = joblib.load(MODEL_PATH)
+    model = model_package["model"]
+    feature_columns = model_package["features"]
+    
+    print("The Model Load Successfully.")
+
 
 
 ## Home Page 
@@ -95,5 +111,3 @@ def predict_churn(
     )
 
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="localhost", port=8001)
