@@ -6,7 +6,7 @@ on:
       - main
 
 env:
-  AWS_REGION: ap-south-1
+  AWS_REGION: eu-north-1
   ECS_CLUSTER: Customer-churn-prediction-demo
   ECS_SERVICE: Customer_churn_demo-service
   ECS_TASK_DEFINITION: task-definition.json
